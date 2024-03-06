@@ -6,11 +6,37 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    mode: "jit",
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: "1rem",
+        sm: "2rem",
+        lg: "3rem",
+        xl: "4rem",
+        "2xl": "5rem",
+      },
+    },
     extend: {
+      colors: {
+        primary: "var(--primary-color)",
+        white: "var(--white-color)",
+        black: "var(--black-color)",
+        "black-navbar": "var(--black-navbar-color)",
+      },
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "black-transparent-90deg": "var(--black-transparent-90deg-gradient)",
+        "black-transparent-180deg": "var(--black-transparent-180deg-gradient)",
+      },
+      transitionDuration: {
+        125: "125ms",
+      },
+      fontSize: {
+        "4.5xl": "2.5rem",
+      },
+      height: {
+        screen: "100dvh",
+        "half-screen": "50dvh",
       },
     },
   },
