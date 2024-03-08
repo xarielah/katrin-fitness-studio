@@ -5,7 +5,7 @@ import Button from "./Button";
 // TODO: example text, will be updated soon
 const text = {
   title: "הסטודיו של קאתרין",
-  subtitle: "הדרך להצלחה שלך, הדרך להצלחה שלך",
+  subtitle: "להתמלא בעוצמה, להרגיש בבית",
   button: "לפרטים נוספים",
 };
 
@@ -22,9 +22,9 @@ export default function Hero({ media }) {
       >
         <Image
           // TODO: example media, will be updated soon
-          src={media[3]?.url}
-          width={media[3]?.width}
-          height={media[3]?.height}
+          src={media?.url}
+          width={media?.width}
+          height={media?.height}
           alt="Hero Background Image"
           className="h-full w-full object-cover object-center brightness-[45%]"
           loading="eager"
