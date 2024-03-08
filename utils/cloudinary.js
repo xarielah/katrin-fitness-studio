@@ -15,6 +15,7 @@ export default async function getMedia(mediaType, folderName) {
   try {
     const result = await cloudinary.search
       .expression(expressionString)
+      .sort_by("public_id", "asc")
       .execute();
 
     // Modify the URL of each media object to use Cloudinary's auto quality and format
