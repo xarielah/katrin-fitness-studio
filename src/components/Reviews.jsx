@@ -25,7 +25,7 @@ export default function Reviews({ media }) {
               options={{
                 loop: true,
                 align: "center",
-                duration: "15",
+                duration: "5",
                 breakpoints: {
                   "(min-width: 1024px)": {
                     align: "start",

@@ -5,7 +5,7 @@ import fetchCloudinaryResources from "../../../utils/cloudinary";
 const carouselOptions = {
   loop: true,
   align: "center",
-  duration: "10",
+  duration: "5",
   breakpoints: {
     "(min-width: 1024px)": {
       align: "start",
