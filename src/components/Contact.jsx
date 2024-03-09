@@ -1,13 +1,15 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Button from "./Button";
 import Input from "./Input";
-import Modal from "./Modal";
 import SocialLinks from "./SocialLinks";
 import Textarea from "./Textarea";
+
+const Modal = dynamic(() => import("./Modal"));
 
 const customErrorMessages = {
   name: "אנא הזיני שם מלא",
