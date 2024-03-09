@@ -96,8 +96,8 @@ export default function Navbar() {
               <Image
                 src={"/Navbar/logo.webp"}
                 alt="Katrin's Logo"
-                width={1865}
-                height={893}
+                width={100}
+                height={100}
                 priority={true}
                 className="object-contain object-center"
               />
@@ -110,15 +110,14 @@ export default function Navbar() {
           >
             <ul className="grid w-full auto-cols-auto place-items-center divide-y text-center  lg:m-0 lg:flex lg:flex-row-reverse lg:items-center lg:justify-center lg:gap-4 lg:divide-y-0 lg:divide-white">
               {Object.entries(links).map(([key, { href, label }]) => (
-                <Link
-                  href={href}
-                  key={href}
-                  className={`${href === links.contact.href && "lg:hidden"} w-full cursor-pointer lg:w-auto`}
+                <li
+                  key={key}
+                  className={`${href === links.contact.href && "lg:hidden"} w-full p-4 transition-colors duration-100 lg:px-2 lg:py-1 lg:hover:text-primary`}
                 >
-                  <li className="w-full p-4 transition-colors duration-100 lg:px-2 lg:py-1 lg:hover:text-primary">
+                  <Link href={href} className="w-full lg:w-auto">
                     {label}
-                  </li>
-                </Link>
+                  </Link>
+                </li>
               ))}
             </ul>
           </nav>
