@@ -6,11 +6,26 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export default async function getMedia(mediaType, folderName) {
+/**
+ * @param {*} mediaType - "image" or "video"
+ * @param {*} folderName - the name of the folder in Cloudinary
+ * @param {*} width - the width of the image - default is 500
+ * @param {*} publicId - the public ID of the media - optional
+ * @returns
+ */
+
+export default async function fetchCloudinaryResources(
+  mediaType,
+  folderName,
+  width = 500,
+  publicId,
+) {
   let expressionString =
     (mediaType ? `resource_type:${mediaType}` : "") +
     (mediaType && folderName ? " AND " : "") +
-    (folderName ? `folder=${folderName}` : "");
+    (mediaType && folderName ? `folder=${folderName}` : "") +
+    (mediaType && folderName && publicId ? " AND " : "") +
+    (mediaType && folderName && publicId ? `public_id=${publicId}` : "");
 
   try {
     const result = await cloudinary.search
@@ -22,8 +37,14 @@ export default async function getMedia(mediaType, folderName) {
     if (mediaType === "image") {
       result.resources.forEach((mediaObj) => {
         mediaObj.url = cloudinary.url(mediaObj.public_id, {
-          quality: "auto:low",
-          fetch_format: "auto",
+          transformation: [
+            {
+              quality: "auto",
+              fetch_format: "auto",
+              crop: "scale",
+              width,
+            },
+          ],
         });
       });
     }
@@ -34,9 +55,11 @@ export default async function getMedia(mediaType, folderName) {
           resource_type: "video",
           transformation: [
             {
-              quality: "auto:low",
+              quality: "auto",
               fetch_format: "auto:video",
               video_codec: "auto",
+              crop: "scale",
+              width,
             },
           ],
         });

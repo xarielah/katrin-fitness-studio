@@ -7,7 +7,7 @@ import Services from "@/components/Services";
 import Studio from "@/components/Studio";
 import Transformations from "@/components/Transformations";
 import Head from "next/head";
-import getMedia from "../../utils/cloudinary";
+import fetchCloudinaryResources from "../../utils/cloudinary";
 
 export default function Home({
   studioAssets,
@@ -35,11 +35,18 @@ export default function Home({
 
 export async function getStaticProps() {
   try {
-    const studioAssets = await getMedia("image", "studio");
-    const servicesAssets = await getMedia("image", "services");
-    const transformationsAssets = await getMedia("image", "transformations");
-    const reviewsAssets = await getMedia("image", "reviews");
-    const katrinAssests = await getMedia("image", "katrin");
+    const studioAssets = await fetchCloudinaryResources(
+      "image",
+      "studio",
+      1280,
+    );
+    const servicesAssets = await fetchCloudinaryResources("image", "services");
+    const transformationsAssets = await fetchCloudinaryResources(
+      "image",
+      "transformations",
+    );
+    const reviewsAssets = await fetchCloudinaryResources("image", "reviews");
+    const katrinAssests = await fetchCloudinaryResources("image", "katrin");
 
     return {
       props: {
@@ -49,7 +56,6 @@ export async function getStaticProps() {
         reviewsAssets,
         katrinAssests,
       },
-      revalidate: 10,
     };
   } catch (error) {
     console.error("Error fetching images from Cloudinary:", error);

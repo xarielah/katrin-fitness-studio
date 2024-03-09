@@ -2,7 +2,7 @@ import Button from "@/components/Button";
 import Carousel from "@/components/Carousel/Carousel";
 import Head from "next/head";
 import Link from "next/link";
-import getMedia from "../../../utils/cloudinary";
+import fetchCloudinaryResources from "../../../utils/cloudinary";
 
 const carouselOptions = {
   loop: true,
@@ -67,13 +67,12 @@ export default function Gallery({ recipesAssets }) {
 
 export async function getStaticProps() {
   try {
-    const recipesAssets = await getMedia("video", "recipes");
+    const recipesAssets = await fetchCloudinaryResources("video", "recipes");
 
     return {
       props: {
         recipesAssets,
       },
-      revalidate: 10,
     };
   } catch (error) {
     console.error("Error fetching images from Cloudinary:", error);

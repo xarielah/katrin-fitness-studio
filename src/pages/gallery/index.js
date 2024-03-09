@@ -1,6 +1,6 @@
 import Carousel from "@/components/Carousel/Carousel";
 import Head from "next/head";
-import getMedia from "../../../utils/cloudinary";
+import fetchCloudinaryResources from "../../../utils/cloudinary";
 
 const carouselOptions = {
   loop: true,
@@ -65,9 +65,16 @@ export default function Gallery({
 
 export async function getStaticProps() {
   try {
-    const galleryAssets = await getMedia("image", "studio");
-    const pilatesAssets = await getMedia("video", "pilates");
-    const strengthTrainingAssets = await getMedia("video", "strength-training");
+    const galleryAssets = await fetchCloudinaryResources(
+      "image",
+      "studio",
+      1000,
+    );
+    const pilatesAssets = await fetchCloudinaryResources("video", "pilates");
+    const strengthTrainingAssets = await fetchCloudinaryResources(
+      "video",
+      "strength-training",
+    );
 
     return {
       props: {
@@ -75,7 +82,6 @@ export async function getStaticProps() {
         pilatesAssets,
         strengthTrainingAssets,
       },
-      revalidate: 10,
     };
   } catch (error) {
     console.error("Error fetching images from Cloudinary:", error);
