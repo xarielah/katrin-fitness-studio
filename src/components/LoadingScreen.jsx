@@ -41,9 +41,9 @@ export default function LoadingScreen() {
           >
             <div className="relative w-3/5 rounded-full lg:w-1/6">
               <Image
-                src={"/loadingScreen/circleLogo.webp"}
-                width={500}
-                height={500}
+                src={"/LoadingScreen/circleLogo.webp"}
+                width={250}
+                height={250}
                 alt="Loading Screen"
                 priority={true}
                 className="aspect-square w-full rounded-full object-cover object-center drop-shadow-lg"
