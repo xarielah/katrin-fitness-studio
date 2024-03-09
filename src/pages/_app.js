@@ -2,6 +2,7 @@ import Footer from "@/components/Footer";
 import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import "@/styles/globals.css";
+import { Analytics } from "@vercel/analytics/react";
 import { Assistant } from "next/font/google";
 import Head from "next/head";
 
@@ -13,6 +14,7 @@ export default function App({ Component, pageProps }) {
       <Head>
         <link rel="icon" href="/logo.svg" sizes="any" />
       </Head>
+      <Analytics />
       <LoadingScreen />
       <Navbar />
       <Component {...pageProps} />
