@@ -32,14 +32,14 @@ export default function Transformations({ media }) {
         </div>
 
         {/* gallery */}
-        <div className=" grid grid-cols-2 place-items-center gap-2 gap-y-4 lg:grid-cols-4 lg:gap-4 lg:gap-y-8">
-          {media.map((mediaObj, index) => (
+        <div className="flex flex-wrap items-center justify-center">
+          {media.map((mediaObj) => (
             <motion.div
               variants={transformationVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className={`${index % 2 === 1 ? "lg:mr-2" : "lg:ml-2"} aspect-[1/1.15] w-full overflow-hidden rounded-lg border-[.5px] border-primary`}
+              className="aspect-[1/1.15] w-1/2 px-0.5 py-1 lg:w-1/4 lg:p-1"
               key={mediaObj?.asset_id}
             >
               <Image
@@ -47,7 +47,7 @@ export default function Transformations({ media }) {
                 width={mediaObj?.width}
                 height={mediaObj?.height}
                 alt={`Image ${mediaObj?.asset_id}`}
-                className="h-full w-full object-cover object-center drop-shadow-md"
+                className="h-full w-full rounded-lg border-[.5px] border-primary object-cover object-center drop-shadow-md"
                 loading="lazy"
               />
             </motion.div>
