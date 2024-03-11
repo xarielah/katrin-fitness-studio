@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { cn } from "../../../utils/cn";
+import { urlFor } from "../../../utils/sanity/imageUrlBuilder";
 
 const serviceVariants = {
   hidden: { opacity: 0, y: 100 },
@@ -15,6 +16,8 @@ const serviceVariants = {
 };
 
 export default function ServiceCard(props) {
+  const { content } = props;
+
   return (
     <motion.div
       variants={serviceVariants}
@@ -24,9 +27,9 @@ export default function ServiceCard(props) {
       className="h-full w-full"
     >
       <Image
-        src={props.image?.url}
-        width={props.image?.width}
-        height={props.image?.height}
+        src={urlFor(content?.mainImage).url()}
+        width={750}
+        height={450}
         alt="Services Image"
         className={cn(
           "mb-2 aspect-[1/1.15] h-full w-full rounded-lg object-cover object-center drop-shadow-md",
@@ -34,8 +37,8 @@ export default function ServiceCard(props) {
         )}
         loading="lazy"
       />
-      <h2 className="text-xl text-primary lg:text-2xl">{props.title}</h2>
-      <p className="text-lg font-thin lg:text-xl">{props.description}</p>
+      <h2 className="text-xl text-primary lg:text-2xl">{content?.title}</h2>
+      <p className="text-lg font-thin lg:text-xl">{content?.subtitle}</p>
     </motion.div>
   );
 }
