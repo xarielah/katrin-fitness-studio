@@ -1,6 +1,4 @@
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { cn } from "../../utils/cn";
+import ServiceCard from "./ServiceCard";
 
 // TODO: example text, will be updated soon
 const text = {
@@ -31,18 +29,18 @@ export default function Services({ media }) {
           style={{ direction: "rtl" }}
           className="container flex w-full flex-col items-center justify-between gap-6 text-center text-white lg:flex-row lg:gap-14"
         >
-          <Service
+          <ServiceCard
             image={media[2]}
             title={text.strength.title}
             description={text.strength.description}
           />
-          <Service
+          <ServiceCard
             image={media[1]}
             title={text.pilates.title}
             description={text.pilates.description}
             className="lg:aspect-[1/1.5]"
           />
-          <Service
+          <ServiceCard
             image={media[0]}
             title={text.functional.title}
             description={text.functional.description}
@@ -50,43 +48,5 @@ export default function Services({ media }) {
         </div>
       </section>
     </>
-  );
-}
-
-const serviceVariants = {
-  hidden: { opacity: 0, y: 100 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      delay: 0.25,
-    },
-  },
-};
-
-function Service(props) {
-  return (
-    <motion.div
-      variants={serviceVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      className="h-full w-full"
-    >
-      <Image
-        src={props.image?.url}
-        width={props.image?.width}
-        height={props.image?.height}
-        alt="Services Image"
-        className={cn(
-          "mb-2 aspect-[1/1.15] h-full w-full rounded-lg object-cover object-center drop-shadow-md",
-          props.className,
-        )}
-        loading="lazy"
-      />
-      <h2 className="text-xl text-primary lg:text-2xl">{props.title}</h2>
-      <p className="text-lg font-thin lg:text-xl">{props.description}</p>
-    </motion.div>
   );
 }

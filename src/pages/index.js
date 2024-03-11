@@ -3,7 +3,7 @@ import Faq from "@/components/Faq";
 import Hero from "@/components/Hero";
 import Katrin from "@/components/Katrin";
 import Reviews from "@/components/Reviews";
-import Services from "@/components/Services";
+import Services from "@/components/Services/Services";
 import Studio from "@/components/Studio";
 import Transformations from "@/components/Transformations";
 import Head from "next/head";
