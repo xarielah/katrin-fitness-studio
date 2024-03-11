@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Button from "./Button";
 import Input from "./Input";
+import LoadingSpinner from "./LoadingSpinner";
 import Modal from "./Modal";
 import SocialLinks from "./SocialLinks";
 import Textarea from "./Textarea";
@@ -56,6 +57,9 @@ export default function Contact() {
 
   const [honeypot, setHoneypot] = useState("");
   const [modalMessage, setModalMessage] = useState(null);
+  const [isLoading, setLoading] = useState(false);
+
+
 
   async function onSubmit(data) {
     // Human will not fill this field
@@ -64,6 +68,8 @@ export default function Contact() {
     }
 
     try {
+      setLoading(true);
+
       const response = await fetch("/api/resend", {
         method: "POST",
         headers: {
@@ -80,6 +86,8 @@ export default function Contact() {
     } catch (err) {
       console.error(err);
       setModalMessage(modalMessages.fail);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -154,7 +162,7 @@ export default function Contact() {
               type="submit"
               className="ml-auto mt-3 w-full text-base drop-shadow-md lg:w-auto lg:text-lg"
             >
-              {text.submitButton}
+              {isLoading ? <LoadingSpinner className="mx-auto" /> : text.submitButton}
             </Button>
           </form>
         </div>
