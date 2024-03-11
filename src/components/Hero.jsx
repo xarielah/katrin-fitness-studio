@@ -1,11 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import { urlFor } from "../../utils/sanity/imageUrlBuilder";
 import Button from "./Button";
 
-// TODO: example text, will be updated soon
 const text = {
-  title: "הסטודיו של קאתרין",
-  subtitle: "להתמלא בעוצמה, להרגיש בבית",
   button: "לפרטים נוספים",
 };
 
@@ -13,7 +11,7 @@ const link = {
   services: "/#services",
 };
 
-export default function Hero({ media }) {
+export default function Hero({ content }) {
   return (
     <section className="relative flex h-[100svh] w-full items-center" id="hero">
       <div
@@ -21,13 +19,12 @@ export default function Hero({ media }) {
         className="absolute left-0 top-0 h-full w-full bg-black"
       >
         <Image
-          // TODO: example media, will be updated soon
-          src={media?.url}
-          width={media?.width}
-          height={media?.height}
+          src={urlFor(content?.mainImage).url()}
+          fill
+          sizes="100vw"
           alt="Hero Background Image"
+          loading="lazy"
           className="h-full w-full object-cover object-center brightness-[45%]"
-          loading="eager"
         />
       </div>
 
@@ -37,10 +34,10 @@ export default function Hero({ media }) {
           className="flex w-full flex-col items-center justify-between gap-10 text-center text-white drop-shadow-md lg:items-end lg:gap-14 lg:text-right"
         >
           <h1 id="hero-header" className="text-4xl lg:text-6xl">
-            {text.title}
+            {content?.title}
           </h1>
           <p id="hero-text" className="text-2xl font-thin lg:text-3xl">
-            {text.subtitle}
+            {content?.subtitle}
           </p>
           <Button type="button" id="more-info-button" className="lg:ml-auto">
             <Link scroll={false} href={link.services}>

@@ -8,8 +8,11 @@ import Studio from "@/components/Studio";
 import Transformations from "@/components/Transformations";
 import Head from "next/head";
 import fetchCloudinaryResources from "../../utils/cloudinary";
+import { GROQqueries } from "../../utils/sanity/GROQqueries";
+import { client } from "../../utils/sanity/client";
 
 export default function Home({
+  heroContent,
   studioAssets,
   servicesAssets,
   transformationsAssets,
@@ -21,7 +24,7 @@ export default function Home({
       <Head>
         <title>הסטודיו של קאתרין - דף הבית</title>
       </Head>
-      <Hero media={studioAssets[0]} />
+      <Hero content={heroContent[0]} />
       <Services media={servicesAssets} />
       <Studio media={studioAssets[1]} />
       <Transformations media={transformationsAssets} />
@@ -35,11 +38,8 @@ export default function Home({
 
 export async function getStaticProps() {
   try {
-    const studioAssets = await fetchCloudinaryResources(
-      "image",
-      "studio",
-      1280,
-    );
+    const heroContent = await client.fetch(GROQqueries.hero);
+    const studioAssets = await fetchCloudinaryResources("image", "studio");
     const servicesAssets = await fetchCloudinaryResources("image", "services");
     const transformationsAssets = await fetchCloudinaryResources(
       "image",
@@ -50,6 +50,7 @@ export async function getStaticProps() {
 
     return {
       props: {
+        heroContent,
         studioAssets,
         servicesAssets,
         transformationsAssets,
@@ -61,6 +62,7 @@ export async function getStaticProps() {
     console.error("Error fetching images from Cloudinary:", error);
     return {
       props: {
+        heroContent: [],
         studioAssets: [],
         servicesAssets: [],
         transformationsAssets: [],
